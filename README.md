@@ -1,4 +1,4 @@
-Open pFind to limelight XML Converter
+MODa to limelight XML Converter
 =======================================
 
 Use this program to convert the results of an MODa analysis to

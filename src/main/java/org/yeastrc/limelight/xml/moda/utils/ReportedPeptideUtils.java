@@ -5,8 +5,11 @@ import org.yeastrc.limelight.xml.moda.objects.ModAReportedPeptide;
 import org.yeastrc.limelight.xml.moda.objects.ModAResults;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ReportedPeptideUtils {
 
@@ -58,7 +61,7 @@ public class ReportedPeptideUtils {
 
                 // were we building a mod?
                 if(currentMod != null) {
-                    reportedMods.put(currentPosition, new BigDecimal(currentMod));
+                    reportedMods.put(currentPosition, new BigDecimal(currentMod).setScale(0, RoundingMode.HALF_UP));
                     currentMod = null;
                 }
 
@@ -75,11 +78,20 @@ public class ReportedPeptideUtils {
                 continue;
             }
 
+            if(c.equals(".")) {
+                if(currentMod == null) {
+                    throw new Exception("Got unexpected mod value in: " + reportedPeptideString);
+                }
+
+                currentMod += c;
+                continue;
+            }
+
             throw new Exception("Got unexpected mod value in: " + reportedPeptideString);
         }
 
         if(currentMod != null) {
-            reportedMods.put(currentPosition, new BigDecimal(currentMod));
+            reportedMods.put(currentPosition, new BigDecimal(currentMod).setScale(0, RoundingMode.HALF_UP));
         }
 
         return reportedMods;
@@ -115,12 +127,14 @@ public class ReportedPeptideUtils {
      * @throws Exception
      */
     public static String getReportedPeptideFromLongFormPeptide(String longFormPeptide) throws Exception {
-        String[] f = longFormPeptide.split("\\.");
-        if(f.length != 3) {
+        Pattern p = Pattern.compile("^[A-Z\\-]\\.([A-Z0-9\\.\\+\\-]+)\\.[A-Z\\-]$");
+        Matcher m = p.matcher(longFormPeptide);
+
+        if(!m.matches()) {
             throw new Exception("Got unexpected form for long form peptide: " + longFormPeptide);
         }
 
-        return f[1];
+        return m.group(1);
     }
 
 

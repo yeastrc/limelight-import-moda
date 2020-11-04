@@ -6,6 +6,6 @@ public class Constants {
 	
 	public static final String CONVERSION_PROGRAM_NAME = "modA2LimelightXML.jar";
 	public static final String CONVERSION_PROGRAM_URI = "https://github.com/yeastrc/limelight-import-moda";
-	public static final String CONVERSION_PROGRAM_VERSION = "1.0.3";
+	public static final String CONVERSION_PROGRAM_VERSION = "1.0.4";
 	
 }

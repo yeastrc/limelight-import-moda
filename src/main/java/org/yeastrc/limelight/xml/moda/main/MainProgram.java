@@ -83,7 +83,7 @@ public class MainProgram implements Runnable {
 		ConversionParameters cp = new ConversionParameters(dataFile, paramsFile, fastaFile, outFile, decoyPrefix, cpi);
 
 		try {
-			ConverterRunner.createInstance().convertOpenPfindToLimelightXML(cp);
+			ConverterRunner.createInstance().convertModAToLimelightXML(cp);
 		} catch( Throwable t ) {
 
 			if(verboseRequested) {

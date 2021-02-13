@@ -31,7 +31,7 @@ public class ConverterRunner {
 	public static ConverterRunner createInstance() { return new ConverterRunner(); }
 	
 	
-	public void convertOpenPfindToLimelightXML(ConversionParameters conversionParameters ) throws Throwable {
+	public void convertModAToLimelightXML(ConversionParameters conversionParameters ) throws Throwable {
 
 		System.err.print( "\nLoading MODa params..." );
 		Map<String, BigDecimal> staticMods = ModAParamsFileReader.getStaticMods(conversionParameters.getParamsFile());

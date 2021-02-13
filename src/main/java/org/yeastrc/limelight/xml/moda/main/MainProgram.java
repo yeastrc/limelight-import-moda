@@ -52,7 +52,7 @@ public class MainProgram implements Runnable {
 	@CommandLine.Option(names = { "-o", "--out-file" }, required = true, description = "Full path to use for the Limelight XML output file (including file name).")
 	private String outFile;
 
-	@CommandLine.Option(names = { "-d", "--decoy-prefix" }, required = false, description = "A prefix string that indicates a decoy proteins, e.g., random_.")
+	@CommandLine.Option(names = { "-d", "--decoy-prefix" }, required = true, description = "A prefix string that indicates a decoy proteins, e.g., random_.")
 	private String decoyPrefix;
 
 	@CommandLine.Option(names = { "-v", "--verbose" }, required = false, description = "If this parameter is present, error messages will include a full stacktrace. Helpful for debugging.")
